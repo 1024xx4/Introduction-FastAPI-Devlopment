@@ -9,8 +9,8 @@ router = APIRouter()
 
 
 @router.get("/tasks", response_model=list[task_schema.Task])
-async def list_tasks():
-    return [task_schema.Task(id=1, title="１つ目の ToDo タスク")]
+async def list_tasks(db: Session = Depends(get_db)):
+    return task_crud.get_task_with_done(db)
 
 
 @router.post("/tasks", response_model=task_schema.TaskCreateResponse)
