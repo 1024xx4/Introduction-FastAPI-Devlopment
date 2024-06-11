@@ -40,3 +40,8 @@ def create_task(db: Session, task_create: task_schema.TaskCreate) -> task_model.
     db.commit()  # DB に Commit
     db.refresh(task)  # DB条のデータをもとに task を更新する
     return task  # 作成した DBモデルを返す
+
+
+def delete_task(db: Session, original: task_model.Task) -> None:
+    db.delete(original)
+    db.commit()
